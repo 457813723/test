@@ -1,7 +1,6 @@
 FROM centos:latest
 WORKDIR /usr/local
-COPY . .
+COPY test .
 EXPOSE 8899
 
-#ENTRYPOINT ["/bin/sh", "-c", "env;sleep 3600"]
 ENTRYPOINT ["./test"]
