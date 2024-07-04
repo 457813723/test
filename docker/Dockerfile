@@ -1,6 +1,6 @@
-FROM centos:latest
+FROM ubuntu:latest
 WORKDIR /usr/local
-COPY test .
+COPY myapp .
 EXPOSE 8899
 
-ENTRYPOINT ["./test"]
+ENTRYPOINT ["./myapp"]
