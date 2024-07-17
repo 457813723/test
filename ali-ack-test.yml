@@ -1,0 +1,26 @@
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: test-ack-deploy
+  labels:
+    app: test-ack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-ack
+  template:
+    metadata:
+      labels:
+        app: test-ack
+    spec:
+      #  nodeSelector:
+      #    env: test-team
+      containers:
+        - name: test-ack
+          image: registry-vpc.cn-chengdu.aliyuncs.com/michael-namespace/michael-rep:latest # replace it with your exactly <image_name:tags>
+          ports:
+            - containerPort: 8899
+          resources:
+            limits:
+              cpu: "500m"
