@@ -11,8 +11,12 @@ import (
 	"time"
 )
 
+var (
+	ctxServer, cancel = context.WithCancel(context.Background())
+	wgServer          = sync.WaitGroup{}
+)
+
 func main() {
-	log.Debugf("start：")
 	app := &cli.App{
 		Flags: []cli.Flag{
 			&cli.StringFlag{
@@ -32,6 +36,7 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
+	wgServer.Wait()
 }
 
 func runServer(ctx *cli.Context) error {
@@ -47,8 +52,9 @@ func runServer(ctx *cli.Context) error {
 		initTimerServer()
 	} else {
 		fmt.Println("init api server and timer server")
-		initApiServer()
 		initTimerServer()
+		initApiServer()
+
 	}
 	return nil
 }
@@ -61,17 +67,15 @@ func initApiServer() {
 }
 func initTimerServer() {
 	ticker := time.NewTicker(time.Second * 2)
-	wg := sync.WaitGroup{}
-	wg.Add(1)
-	ctxServer, _ := context.WithCancel(context.Background())
+	wgServer.Add(1)
 	go func() {
 		for {
 			select {
 			case <-ticker.C:
-				log.Debug("timer start ...")
+				fmt.Println("timer start ...")
 			case <-ctxServer.Done():
-				log.Debug("timer done")
-				wg.Done()
+				fmt.Println("timer done")
+				wgServer.Done()
 				return
 			}
 		}
