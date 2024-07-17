@@ -1,0 +1,25 @@
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: register-timer-deployment
+  labels:
+    app: register-timer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: register-timer
+  template:
+    metadata:
+      labels:
+        app: register-timer
+    spec:
+      containers:
+        - name: register-timer
+          image: registry-vpc.cn-chengdu.aliyuncs.com/michael-namespace/das-register:timer # replace it with your exactly <image_name:tags>
+          imagePullPolicy: Always # 拉取策略 如果k8s判断到镜像名:tag 都没变，就不会重新拉取镜像，所以这里要设置为always总是拉取
+          ports:
+            - containerPort: 8899
+          resources:
+            limits:
+              cpu: "500m"
