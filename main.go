@@ -7,7 +7,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.GET("/test", func(c *gin.Context) {
-		c.JSON(200, "hello world v7.0.0")
+		c.JSON(200, "hello world v8.0.0")
 	})
 	r.Run("0.0.0.0:8899") // 监听并在 0.0.0.0:8899 上启动服务
 }
