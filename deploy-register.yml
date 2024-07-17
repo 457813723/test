@@ -1,23 +1,23 @@
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: register-api-deployment
+  name: register-deployment
   labels:
-    app: register-api
+    app: register
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: register-api
+      app: register
   template:
     metadata:
       labels:
-        app: register-api
+        app: register
     spec:
       #  nodeSelector:
       #    env: test-team
       containers:
-        - name: register-api
+        - name: register
           image: registry-vpc.cn-chengdu.aliyuncs.com/michael-namespace/das-register:api-timer # replace it with your exactly <image_name:tags>
           imagePullPolicy: Always # 拉取策略 如果k8s判断到镜像名:tag 都没变，就不会重新拉取镜像，所以这里要设置为always总是拉取
           command: [ "./myapp" ]
