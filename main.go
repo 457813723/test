@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/labstack/gommon/log"
 	"github.com/urfave/cli/v2"
 	"os"
 	"sync"
@@ -34,7 +33,7 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 	wgServer.Wait()
 }

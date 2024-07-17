@@ -20,6 +20,8 @@ spec:
         - name: register-api
           image: registry-vpc.cn-chengdu.aliyuncs.com/michael-namespace/das-register:api # replace it with your exactly <image_name:tags>
           imagePullPolicy: Always # 拉取策略 如果k8s判断到镜像名:tag 都没变，就不会重新拉取镜像，所以这里要设置为always总是拉取
+          command: [ "./myapp" ]
+          args: [ "--config=/mnt/test.conf", "--mode=api" ]
           ports:
             - containerPort: 8899
           resources:
