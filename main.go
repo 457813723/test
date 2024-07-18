@@ -60,7 +60,7 @@ func runServer(ctx *cli.Context) error {
 func initApiServer() {
 	r := gin.Default()
 	r.GET("/api/test", func(c *gin.Context) {
-		c.JSON(200, "hello world v11.0.0")
+		c.JSON(200, "hello world v12.0.0")
 	})
 	r.Run("0.0.0.0:8899") // 监听并在 0.0.0.0:8899 上启动服务
 }
