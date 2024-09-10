@@ -55,7 +55,7 @@ func runServer(ctx *cli.Context) error {
 func initApiServer() {
 	r := gin.Default()
 	r.GET("/test", func(c *gin.Context) {
-		c.JSON(200, "hello world v2.0.0---dev")
+		c.JSON(200, "dev hello world v2.0.0---dev")
 	})
 	r.Run("0.0.0.0:8899") // 监听并在 0.0.0.0:8899 上启动服务
 }
